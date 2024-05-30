@@ -1,0 +1,275 @@
+$ThemeColor: rgba(152, 57, 255, 0.5);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+body {
+  // 希望fixed-image的位置是相對於body
+  position: relative;
+  img.fixed-image {
+    // 占滿整個版面
+    min-height: 100vh;
+    position: fixed;
+    width: 100%;
+    // 不要遮住任何東西
+    z-index: -5;
+    bottom: 0;
+    left: 0;
+  }
+
+  header {
+    //  背景的富士山圖就不會出現在header區域裡
+    background-color: white;
+    // 希望section logo和nav可以併排
+    display: flex;
+    flex-wrap: wrap;
+    //   讓h1和nav在同一個橫線上
+    align-items: center;
+
+    // 設定sticky header，隨著網頁捲動，會一直停留在正上方，並且不被其他內容蓋住
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    // 因為導覽列背景也是白色，設定box shadow可以讓它跟其他一樣背景白色的區域區隔出來
+    box-shadow: 0 10px 6px -6px #777;
+
+    section.logo {
+      flex: 2 1 400px;
+      //   border: 2px solid green;
+      // 讓logo h1跟圖片可以併排
+      display: flex;
+      align-items: center;
+      h1 {
+        font-size: 2.5rem;
+      }
+      img {
+        width: 6vw;
+        height: 6vw;
+      }
+    }
+    nav {
+      flex: 5 1 500px;
+      // 縮小到一個程度但不是rwd之前，li元素的hover底下不會可以跟圖片之間有空隙
+      margin-bottom: 0.5rem;
+      ul {
+        display: flex;
+        list-style-type: none;
+        justify-content: space-around;
+        li {
+          a {
+            color: black;
+            text-decoration: none;
+            font-size: 1.35rem;
+            transition: all 0.2s ease;
+            padding-bottom: 0.3rem;
+            &:hover {
+              color: $ThemeColor;
+              //   讓底下有線
+              border-bottom: 3px solid $ThemeColor;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    section.background-img {
+      // margin: 3rem;這個設定也蠻酷的，圖中圖
+      // 設定背景圖片
+      min-height: 70vh;
+      background-image: url("../images/日本櫻花.jpg");
+      background-size: cover;
+      background-position: center;
+      transition: all 0.7s ease;
+      position: relative;
+      // 這個設定後會出現一個stack context
+      z-index: 0;
+      // 以下三行讓文字在圖片中間
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      div.filter {
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        // 最低高度一定要跟background img一樣高
+        min-height: 70vh;
+        // position參考點為background img
+        position: absolute;
+        // 位置會跟background img完全一樣
+        top: 0;
+        left: 0;
+        // 讓filter在文字後面
+        z-index: -1;
+      }
+
+      h3 {
+        color: white;
+        font-size: 2.5rem;
+        // 換行後兩行都在中間
+        text-align: center;
+      }
+    }
+    section.info-circles {
+      background-color: white;
+      padding: 2rem 1rem;
+      h3 {
+        text-align: center;
+        font-size: 2rem;
+      }
+      div.circles {
+        // border: 3px solid black;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        div.circle {
+          padding: 1rem;
+          // border: 3px solid red;
+          // flex grow 為0，flex shrink 為1，250*4 = 1000
+          // 因為不會grow，即便瀏覽器寬度超過1000，多餘的也不會分給那些circle
+          flex: 0 1 250px;
+          // 以下三行讓圖片置中
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          img {
+            width: 80%;
+            // 圖片變成圓的
+            border-radius: 50%;
+            transition: all 0.1s ease-in;
+            padding: 0.5rem;
+            &:hover {
+              // 因為border跟圖片之間有padding所以圖片會往內縮
+              border: 3px solid $ThemeColor;
+            }
+          }
+        }
+      }
+    }
+    section.empty-container {
+      min-height: 70vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h3 {
+        font-size: 2rem;
+        color: white;
+      }
+    }
+    section.google-map {
+      background-color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      h3 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.25rem;
+        margin: 1rem;
+      }
+      iframe {
+        width: 100%;
+        height: 40vh;
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    section.logo {
+      img {
+        width: 20vw;
+      }
+      h3 {
+        font-size: 2.5rem;
+      }
+    }
+
+    section.links {
+      margin-top: 2rem;
+      a {
+        img {
+          width: 5vh;
+          margin: 0rem 1rem;
+        }
+      }
+    }
+  }
+}
+// 以下media設定rwd
+@media screen and (max-width: 700px) {
+  // 一定要設定body
+  body {
+    header {
+      section.logo {
+        flex-direction: column;
+        img {
+          width: 50vw;
+          height: 50vw;
+        }
+      }
+    }
+    nav {
+      ul {
+        flex-direction: column;
+        li {
+          padding: 0.5rem 0.25rem;
+        }
+      }
+    }
+    footer {
+      section.logo {
+        flex-direction: column;
+        img {
+          width: 50vw;
+          height: 50vw;
+        }
+      }
+      section.links {
+        a {
+          img {
+            padding: 0.1rem 0.1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* scroll bar width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* scroll bar  Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* scroll bar Handle */
+::-webkit-scrollbar-thumb {
+  background: $ThemeColor;
+}
+
+/* scroll bar Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #98e1f0;
+}
